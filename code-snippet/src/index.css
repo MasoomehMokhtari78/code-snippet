@@ -1,0 +1,31 @@
+/* Reset and basic page setup */
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+html,
+body,
+#root {
+  height: 100%;
+  width: 100%;
+  font-family: "Fira Code", monospace;
+  background: #1e1e1e; /* dark background like VSCode */
+  color: #d4d4d4;
+  overflow: hidden; /* prevent page scroll */
+}
+
+body {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+/* Optional: allow editor to take full width/height */
+.rc-editor {
+  width: 90%;
+  max-width: 1000px;
+  min-height: 400px;
+  height: 70%;
+}
