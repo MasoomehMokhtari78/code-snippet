@@ -21,7 +21,13 @@ export const CodeEditor = ({
   }, [value, language]);
 
   return (
-    <div style={{ position: "relative", fontFamily: "monospace" }}>
+    <div
+      style={{
+        position: "relative",
+        fontFamily: "monospace",
+        backgroundColor: "#1e1e1e",
+      }}
+    >
       <pre
         ref={preRef}
         aria-hidden
