@@ -8,8 +8,8 @@ function App() {
     <>
       <SnippetLayout
         value={value}
-        onChange={(newValue) => setValue(newValue)}
-        language="javascript"
+        onChange={(newValue: string) => setValue(newValue)}
+        language="python"
       />
     </>
   );
