@@ -1,15 +1,15 @@
 import { useState } from "react";
-import { CodeEditor } from "./components/CodeEditor";
 import "prismjs/themes/prism-tomorrow.css";
+import { SnippetLayout } from "./components/SnippetLayout";
 
 function App() {
   const [value, setValue] = useState<string | undefined>();
   return (
     <>
-      <CodeEditor
+      <SnippetLayout
         value={value}
-        onChange={(newValue) => setValue(newValue)}
-        language="javascript"
+        onChange={(newValue: string) => setValue(newValue)}
+        language="python"
       />
     </>
   );
