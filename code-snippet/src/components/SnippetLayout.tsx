@@ -1,6 +1,7 @@
 import type { CSSProperties } from "react";
-import { CodeEditor, type CodeEditorProps } from "./CodeEditor";
+import { CodeEditor } from "./CodeEditor";
 import { Header } from "./Header";
+import type { CodeEditorProps } from "../types";
 
 export type LayoutType = CodeEditorProps & {
   width?: CSSProperties["width"];
@@ -27,7 +28,8 @@ export const SnippetLayout = ({
         height,
       }}
     >
-      <Header /> <CodeEditor {...rest} />
+      <Header />
+      <CodeEditor {...rest} />
     </div>
   );
 };
