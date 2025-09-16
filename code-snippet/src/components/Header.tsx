@@ -6,7 +6,6 @@ export const Header = () => {
         alignItems: "center",
         gap: "8px",
         padding: "8px 12px",
-        background: "#2d2d2d",
         borderTopLeftRadius: "8px",
         borderTopRightRadius: "8px",
       }}
