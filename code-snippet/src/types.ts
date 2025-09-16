@@ -36,6 +36,7 @@ export type TokenStyles = {
 };
 
 export type EditorTheme = {
+  background?: React.CSSProperties["background"];
   editorStyle?: React.CSSProperties;
   tokenStyles?: TokenStyles;
 };

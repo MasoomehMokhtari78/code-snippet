@@ -1,18 +1,15 @@
 import React from "react";
 import { selectedLanguages } from "./SelectedLanguages";
-
 import type { CodeEditorProps } from "../types";
-import { useTheme } from "../themes/useTheme";
 
 export const CodeEditor = ({
   value = "",
   onChange = () => {},
   language = "javascript",
-  theme = "VSCode Dark+",
 }: CodeEditorProps) => {
   const textareaRef = React.useRef<HTMLTextAreaElement | null>(null);
   const preRef = React.useRef<HTMLPreElement | null>(null);
-  const { finalTheme } = useTheme(theme);
+
   const highlighted = React.useMemo(() => {
     const grammar =
       selectedLanguages.languages[language] ||
@@ -21,13 +18,7 @@ export const CodeEditor = ({
   }, [value, language]);
 
   return (
-    <div
-      style={{
-        position: "relative",
-        fontFamily: "monospace",
-        ...finalTheme?.editorStyle,
-      }}
-    >
+    <div style={{ position: "relative" }}>
       <pre
         ref={preRef}
         aria-hidden
