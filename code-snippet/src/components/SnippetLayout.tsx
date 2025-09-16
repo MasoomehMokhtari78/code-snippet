@@ -21,14 +21,15 @@ export const SnippetLayout = ({
   isGlassmorph,
   ...rest
 }: LayoutType) => {
-  const { finalTheme } = useTheme(theme);
+  const { finalTheme } = useTheme(theme, isGlassmorph);
+  console.log(finalTheme);
   return (
     <div
       style={{
         display: "flex",
         flexDirection: "column",
         padding,
-        background,
+        background: finalTheme?.background ?? background,
         width,
         height,
       }}

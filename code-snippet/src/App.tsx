@@ -28,9 +28,10 @@ function App() {
         value={value}
         onChange={(newValue: string) => setValue(newValue)}
         language="javascript"
-        theme={customTheme}
-        // theme="VSCode Dark+"
-        background="linear-gradient(135deg, #8084ac 0%, #2134b0 50%, #1a1b23 100%)"
+        // theme={customTheme}
+        theme="Dracula"
+        isGlassmorph={true}
+        // background="linear-gradient(135deg, #8084ac 0%, #2134b0 50%, #1a1b23 100%)"
       />
     </>
   );

@@ -1,6 +1,7 @@
 export const themes = {
   light: {
-    editorStyle: { backgroundColor: "#fdf6e3" },
+    background: "linear-gradient(135deg, #faf3dd, #fdf6e3)",
+    editorStyle: { backgroundColor: "#fdf6e3e6" },
     tokenStyles: {
       comment: "#93a1a1",
       keyword: "#859900",
@@ -8,6 +9,7 @@ export const themes = {
     },
   },
   seti: {
+    background: "linear-gradient(135deg, #1e2122, #151718)",
     editorStyle: { backgroundColor: "#151718" },
     tokenStyles: {
       comment: "#41535b",
@@ -28,6 +30,7 @@ export const themes = {
     },
   },
   oneDark: {
+    background: "linear-gradient(135deg, #2c313c, #282c34)",
     editorStyle: { backgroundColor: "#282c34" },
     tokenStyles: {
       comment: "#5c6370",
@@ -50,6 +53,7 @@ export const themes = {
     },
   },
   "GitHub Light": {
+    background: "linear-gradient(135deg, #fafbfc, #ffffff)",
     editorStyle: { backgroundColor: "#ffffff", color: "#252424ff" },
     tokenStyles: {
       text: "#24292e",
@@ -61,6 +65,7 @@ export const themes = {
     },
   },
   "VSCode Dark+": {
+    background: "linear-gradient(135deg, #2d2d2d, #1e1e1e)",
     editorStyle: { backgroundColor: "#1e1e1e" },
     tokenStyles: {
       text: "#d4d4d4",
@@ -72,6 +77,7 @@ export const themes = {
     },
   },
   Monokai: {
+    background: "linear-gradient(135deg, #3e3d32, #272822)",
     editorStyle: { backgroundColor: "#272822" },
     tokenStyles: {
       text: "#f8f8f2",
@@ -83,6 +89,7 @@ export const themes = {
     },
   },
   Dracula: {
+    background: "linear-gradient(135deg, #44475a, #282a36)",
     editorStyle: { backgroundColor: "#282a36" },
     tokenStyles: {
       text: "#f8f8f2",
