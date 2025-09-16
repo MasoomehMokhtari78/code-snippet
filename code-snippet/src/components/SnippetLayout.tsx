@@ -10,6 +10,7 @@ export type LayoutType = CodeEditorProps & {
   padding?: CSSProperties["padding"];
   background?: CSSProperties["background"];
   isGlassmorph?: boolean;
+  backgroundImage?: string;
 };
 
 export const SnippetLayout = ({
@@ -19,10 +20,11 @@ export const SnippetLayout = ({
   padding = "16px",
   theme = "VSCode Dark+",
   isGlassmorph,
+  backgroundImage,
   ...rest
 }: LayoutType) => {
   const { finalTheme } = useTheme(theme, isGlassmorph);
-  console.log(finalTheme);
+
   return (
     <div
       style={{
@@ -30,6 +32,12 @@ export const SnippetLayout = ({
         flexDirection: "column",
         padding,
         background: finalTheme?.background ?? background,
+        ...(backgroundImage && {
+          backgroundImage: `url(${backgroundImage})`,
+          backgroundSize: "cover",
+          backgroundRepeat: "no-repeat",
+          backgroundPosition: "center",
+        }),
         width,
         height,
       }}
