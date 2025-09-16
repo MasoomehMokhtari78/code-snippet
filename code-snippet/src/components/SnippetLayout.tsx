@@ -8,15 +8,19 @@ export type LayoutType = CodeEditorProps & {
   width?: CSSProperties["width"];
   height?: CSSProperties["height"];
   padding?: CSSProperties["padding"];
+  fontSize?: CSSProperties["fontSize"];
+  fontFamily?: CSSProperties["fontFamily"];
   isGlassmorph?: boolean;
   backgroundImage?: string;
   isBackgroundTransparent?: boolean;
 };
 
 export const SnippetLayout = ({
-  width,
-  height,
-  padding = "16px",
+  width = "fit-content",
+  height = "fit-content",
+  padding = "32px",
+  fontSize = "16px",
+  fontFamily = "monospace",
   theme = "VSCode Dark+",
   isGlassmorph,
   backgroundImage,
@@ -52,9 +56,12 @@ export const SnippetLayout = ({
       style={{
         display: "flex",
         flexDirection: "column",
+        minWidth: "500px",
         padding,
         width,
         height,
+        fontSize: fontSize,
+        fontFamily,
         ...baseBackground,
         ...imageBackground,
       }}
@@ -62,7 +69,7 @@ export const SnippetLayout = ({
       <div
         style={{
           position: "relative",
-          fontFamily: "monospace",
+          fontFamily: "inherit",
           background: finalTheme?.editorStyle?.backgroundColor,
           borderRadius: "16px",
           ...(isGlassmorph && {

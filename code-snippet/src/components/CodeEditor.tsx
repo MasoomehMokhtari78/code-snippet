@@ -28,9 +28,13 @@ export const CodeEditor = ({
           overflow: "auto",
           whiteSpace: "pre",
           minHeight: 200,
+          fontFamily: "inherit",
         }}
       >
-        <code dangerouslySetInnerHTML={{ __html: highlighted }} />
+        <code
+          style={{ fontFamily: "inherit" }}
+          dangerouslySetInnerHTML={{ __html: highlighted }}
+        />
       </pre>
 
       <textarea
