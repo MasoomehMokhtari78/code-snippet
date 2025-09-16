@@ -1,3 +1,5 @@
+import type { themes } from "./themes/themes";
+
 export type Language =
   | "plaintext"
   | "markup"
@@ -29,8 +31,20 @@ export type Language =
   | "nginx"
   | "markup-templating";
 
+export type TokenStyles = {
+  [token: string]: string;
+};
+
+export type EditorTheme = {
+  editorStyle?: React.CSSProperties;
+  tokenStyles?: TokenStyles;
+};
+
+export type ThemeType = keyof typeof themes | EditorTheme;
+
 export type CodeEditorProps = {
+  theme?: ThemeType;
   value?: string;
   onChange?: (v: string) => void;
-  language?: Language; // <- now typed
+  language?: Language;
 };
