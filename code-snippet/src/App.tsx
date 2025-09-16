@@ -12,8 +12,9 @@ function App() {
         value={value}
         onChange={(newValue: string) => setValue(newValue)}
         language="javascript"
-        // theme={customTheme}
-        isGlassmorph={true}
+        theme="Dracula"
+        // isGlassmorph={true}
+        // isBackgroundTransparent={true}
       />
     </>
   );

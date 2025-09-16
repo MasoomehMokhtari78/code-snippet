@@ -8,22 +8,44 @@ export type LayoutType = CodeEditorProps & {
   width?: CSSProperties["width"];
   height?: CSSProperties["height"];
   padding?: CSSProperties["padding"];
-  background?: CSSProperties["background"];
   isGlassmorph?: boolean;
   backgroundImage?: string;
+  isBackgroundTransparent?: boolean;
 };
 
 export const SnippetLayout = ({
   width,
   height,
-  background = "#185a93ff",
   padding = "16px",
   theme = "VSCode Dark+",
   isGlassmorph,
   backgroundImage,
+  isBackgroundTransparent,
   ...rest
 }: LayoutType) => {
   const { finalTheme } = useTheme(theme, isGlassmorph);
+
+  const baseBackground = isBackgroundTransparent
+    ? {
+        backgroundImage: `
+        linear-gradient(45deg, rgba(0,0,0,0.05) 25%, transparent 25%),
+        linear-gradient(-45deg, rgba(0,0,0,0.05) 25%, transparent 25%),
+        linear-gradient(45deg, transparent 75%, rgba(0,0,0,0.05) 75%),
+        linear-gradient(-45deg, transparent 75%, rgba(0,0,0,0.05) 75%)
+      `,
+        backgroundSize: "20px 20px",
+        backgroundPosition: "0 0, 0 10px, 10px -10px, -10px 0px",
+      }
+    : { background: finalTheme?.background };
+
+  const imageBackground = backgroundImage
+    ? {
+        backgroundImage: `url(${backgroundImage})`,
+        backgroundSize: "cover",
+        backgroundRepeat: "no-repeat",
+        backgroundPosition: "center",
+      }
+    : {};
 
   return (
     <div
@@ -31,15 +53,10 @@ export const SnippetLayout = ({
         display: "flex",
         flexDirection: "column",
         padding,
-        background: finalTheme?.background ?? background,
-        ...(backgroundImage && {
-          backgroundImage: `url(${backgroundImage})`,
-          backgroundSize: "cover",
-          backgroundRepeat: "no-repeat",
-          backgroundPosition: "center",
-        }),
         width,
         height,
+        ...baseBackground,
+        ...imageBackground,
       }}
     >
       <div
