@@ -1,4 +1,4 @@
-import { createContext, useContext, useRef, type ReactNode } from "react";
+import { createContext, useRef, type ReactNode } from "react";
 import { toPng, toSvg } from "html-to-image";
 
 type SnippetContextType = {
@@ -18,6 +18,7 @@ export const SnippetContextProvider = ({
 
   const exportAsPng = async () => {
     if (!editorRef.current) return;
+
     const dataUrl = await toPng(editorRef.current);
     const link = document.createElement("a");
     link.download = "snippet.png";
@@ -27,7 +28,21 @@ export const SnippetContextProvider = ({
 
   const exportAsSvg = async () => {
     if (!editorRef.current) return;
+
+    const textarea = editorRef.current.querySelector("textarea");
+    let previousDisplay: string | null = null;
+    //remove textarea during svg export
+    if (textarea) {
+      previousDisplay = textarea.style.display;
+      textarea.style.display = "none";
+    }
+
     const dataUrl = await toSvg(editorRef.current);
+
+    if (textarea && previousDisplay !== null) {
+      textarea.style.display = previousDisplay;
+    }
+
     const link = document.createElement("a");
     link.download = "snippet.svg";
     link.href = dataUrl;
@@ -41,11 +56,4 @@ export const SnippetContextProvider = ({
   );
 };
 
-export const useSnippetContext = () => {
-  const ctx = useContext(SnippetContext);
-  if (!ctx)
-    throw new Error(
-      "useSnippetExport must be used inside SnippetExportProvider"
-    );
-  return ctx;
-};
+export default SnippetContext;

@@ -2,10 +2,8 @@ import { useState } from "react";
 import "prismjs/themes/prism.css";
 import "./App.css";
 import { SnippetLayout } from "./components/SnippetLayout";
-import {
-  SnippetContextProvider,
-  useSnippetContext,
-} from "./Context/SnippetContext";
+import { SnippetContextProvider } from "./Context/SnippetContext";
+import { useSnippetContext } from "./Context/UseSnippetContext";
 
 function App() {
   return (

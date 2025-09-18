@@ -3,7 +3,7 @@ import { CodeEditor } from "./CodeEditor";
 import type { CodeEditorProps } from "../types";
 import { useTheme } from "../themes/useTheme";
 import { Header } from "./Header";
-import { useSnippetContext } from "../Context/SnippetContext";
+import { useSnippetContext } from "../Context/UseSnippetContext";
 
 export type LayoutType = CodeEditorProps & {
   width?: CSSProperties["width"];
@@ -55,7 +55,7 @@ export const SnippetLayout = ({
   const { editorRef } = useSnippetContext();
   return (
     <div
-      ref={editorRef}
+      ref={!isBackgroundTransparent ? editorRef : null}
       style={{
         display: "flex",
         flexDirection: "column",
@@ -70,6 +70,7 @@ export const SnippetLayout = ({
       }}
     >
       <div
+        ref={isBackgroundTransparent ? editorRef : null}
         style={{
           position: "relative",
           fontFamily: "inherit",

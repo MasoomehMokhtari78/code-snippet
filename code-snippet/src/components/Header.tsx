@@ -5,7 +5,7 @@ export const Header = () => {
         display: "flex",
         alignItems: "center",
         gap: "8px",
-        padding: "8px 12px",
+        padding: "12px 12px 0px 12px",
         borderTopLeftRadius: "8px",
         borderTopRightRadius: "8px",
       }}
