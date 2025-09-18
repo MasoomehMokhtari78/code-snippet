@@ -11,9 +11,9 @@ export type LayoutType = CodeEditorProps & {
   padding?: CSSProperties["padding"];
   fontSize?: CSSProperties["fontSize"];
   fontFamily?: CSSProperties["fontFamily"];
-  isGlassmorph?: boolean;
+  glassEffect?: boolean;
   backgroundImage?: string;
-  isBackgroundTransparent?: boolean;
+  transparentBackground?: boolean;
 };
 
 export const SnippetLayout = ({
@@ -23,14 +23,14 @@ export const SnippetLayout = ({
   fontSize = "16px",
   fontFamily = "monospace",
   theme = "VSCode Dark+",
-  isGlassmorph,
+  glassEffect,
   backgroundImage,
-  isBackgroundTransparent,
+  transparentBackground,
   ...rest
 }: LayoutType) => {
-  const { finalTheme } = useTheme(theme, isGlassmorph);
+  const { finalTheme } = useTheme(theme, glassEffect);
 
-  const baseBackground = isBackgroundTransparent
+  const baseBackground = transparentBackground
     ? {
         backgroundImage: `
         linear-gradient(45deg, rgba(0,0,0,0.05) 25%, transparent 25%),
@@ -55,7 +55,7 @@ export const SnippetLayout = ({
   const { editorRef } = useSnippetContext();
   return (
     <div
-      ref={!isBackgroundTransparent ? editorRef : null}
+      ref={!transparentBackground ? editorRef : null}
       style={{
         display: "flex",
         flexDirection: "column",
@@ -70,13 +70,13 @@ export const SnippetLayout = ({
       }}
     >
       <div
-        ref={isBackgroundTransparent ? editorRef : null}
+        ref={transparentBackground ? editorRef : null}
         style={{
           position: "relative",
           fontFamily: "inherit",
           background: finalTheme?.editorStyle?.backgroundColor,
           borderRadius: "16px",
-          ...(isGlassmorph && {
+          ...(glassEffect && {
             boxShadow: "0 4px 30px rgba(0, 0, 0, 0.1)",
             border: "1px solid rgba(202, 178, 178, 0.3)",
             backdropFilter: "blur(5px)",
