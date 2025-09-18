@@ -1,35 +1,52 @@
 import Prism from "prismjs";
 
-import "prismjs/components/prism-markup";
-import "prismjs/components/prism-markup-templating";
+const languageMap: Record<string, string> = {
+  markup: "prismjs/components/prism-markup",
+  "markup-templating": "prismjs/components/prism-markup-templating",
+  clike: "prismjs/components/prism-clike",
+  c: "prismjs/components/prism-c",
+  cpp: "prismjs/components/prism-cpp",
+  csharp: "prismjs/components/prism-csharp",
+  java: "prismjs/components/prism-java",
+  kotlin: "prismjs/components/prism-kotlin",
+  swift: "prismjs/components/prism-swift",
+  go: "prismjs/components/prism-go",
+  rust: "prismjs/components/prism-rust",
+  php: "prismjs/components/prism-php",
+  ruby: "prismjs/components/prism-ruby",
+  python: "prismjs/components/prism-python",
+  javascript: "prismjs/components/prism-javascript",
+  typescript: "prismjs/components/prism-typescript",
+  jsx: "prismjs/components/prism-jsx",
+  tsx: "prismjs/components/prism-tsx",
+  json: "prismjs/components/prism-json",
+  yaml: "prismjs/components/prism-yaml",
+  markdown: "prismjs/components/prism-markdown",
+  bash: "prismjs/components/prism-bash",
+  css: "prismjs/components/prism-css",
+  scss: "prismjs/components/prism-scss",
+  sql: "prismjs/components/prism-sql",
+  graphql: "prismjs/components/prism-graphql",
+  docker: "prismjs/components/prism-docker",
+  nginx: "prismjs/components/prism-nginx",
+};
 
-import "prismjs/components/prism-clike";
-import "prismjs/components/prism-c";
-import "prismjs/components/prism-cpp";
-import "prismjs/components/prism-csharp";
-import "prismjs/components/prism-java";
-import "prismjs/components/prism-kotlin";
-import "prismjs/components/prism-swift";
-import "prismjs/components/prism-go";
-import "prismjs/components/prism-rust";
-import "prismjs/components/prism-php";
-import "prismjs/components/prism-ruby";
-import "prismjs/components/prism-python";
+export async function loadLanguage(lang: string) {
+  if (Prism.languages[lang]) {
+    return;
+  }
 
-import "prismjs/components/prism-javascript";
-import "prismjs/components/prism-typescript";
-import "prismjs/components/prism-jsx";
-import "prismjs/components/prism-tsx";
-import "prismjs/components/prism-json";
-import "prismjs/components/prism-yaml";
-import "prismjs/components/prism-markdown";
-import "prismjs/components/prism-bash";
-import "prismjs/components/prism-css";
-import "prismjs/components/prism-scss";
+  const filePath = languageMap[lang];
+  if (!filePath) {
+    console.warn(`Language '${lang}' is not supported or mapped.`);
+    return;
+  }
 
-import "prismjs/components/prism-sql";
-import "prismjs/components/prism-graphql";
-import "prismjs/components/prism-docker";
-import "prismjs/components/prism-nginx";
+  try {
+    await import(filePath);
+  } catch (error) {
+    console.error(`Failed to load language: ${lang}`, error);
+  }
+}
 
 export const selectedLanguages = Prism;

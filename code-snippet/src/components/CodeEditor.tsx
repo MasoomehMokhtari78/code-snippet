@@ -1,5 +1,5 @@
-import React from "react";
-import { selectedLanguages } from "./SelectedLanguages";
+import React, { useState, useEffect, useRef } from "react";
+import { selectedLanguages, loadLanguage } from "./SelectedLanguages";
 import type { CodeEditorProps } from "../types";
 
 export const CodeEditor = ({
@@ -7,15 +7,32 @@ export const CodeEditor = ({
   onChange = () => {},
   language = "javascript",
 }: CodeEditorProps) => {
-  const textareaRef = React.useRef<HTMLTextAreaElement | null>(null);
-  const preRef = React.useRef<HTMLPreElement | null>(null);
+  const textareaRef = useRef<HTMLTextAreaElement | null>(null);
+  const preRef = useRef<HTMLPreElement | null>(null);
+
+  const [isLanguageLoaded, setIsLanguageLoaded] = useState(false);
+
+  // dyanmically loading languages
+  useEffect(() => {
+    setIsLanguageLoaded(false);
+    loadLanguage(language).then(() => {
+      setIsLanguageLoaded(true);
+    });
+  }, [language]);
 
   const highlighted = React.useMemo(() => {
+    if (!isLanguageLoaded) {
+      return "Loading...";
+    }
     const grammar =
       selectedLanguages.languages[language] ||
       selectedLanguages.languages.plaintext;
     return selectedLanguages.highlight(value, grammar, language);
-  }, [value, language]);
+  }, [value, language, isLanguageLoaded]);
+
+  if (!isLanguageLoaded) {
+    return <div>Loading language...</div>;
+  }
 
   return (
     <div style={{ position: "relative" }}>
