@@ -3,6 +3,7 @@ import { CodeEditor } from "./CodeEditor";
 import type { CodeEditorProps } from "../types";
 import { useTheme } from "../themes/useTheme";
 import { Header } from "./Header";
+import { useSnippetContext } from "../Context/SnippetContext";
 
 export type LayoutType = CodeEditorProps & {
   width?: CSSProperties["width"];
@@ -51,8 +52,10 @@ export const SnippetLayout = ({
       }
     : {};
 
+  const { editorRef } = useSnippetContext();
   return (
     <div
+      ref={editorRef}
       style={{
         display: "flex",
         flexDirection: "column",
