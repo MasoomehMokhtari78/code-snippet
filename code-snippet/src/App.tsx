@@ -1,5 +1,4 @@
 import { useState } from "react";
-import "prismjs/themes/prism.css";
 import "./App.css";
 import { SnippetLayout } from "./components/SnippetLayout";
 import { SnippetContextProvider } from "./Context/SnippetContext";
@@ -30,7 +29,7 @@ function SnippetComp() {
         value={value}
         onChange={(newValue: string) => setValue(newValue)}
         language="python"
-        theme="Dracula"
+        theme="seti"
         fontSize="14px"
         fontFamily="cursive"
       />

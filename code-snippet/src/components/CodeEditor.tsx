@@ -1,6 +1,15 @@
-import React, { useState, useEffect, useRef } from "react";
-import { selectedLanguages, loadLanguage } from "./SelectedLanguages";
+import { useRef, useMemo } from "react";
 import type { CodeEditorProps } from "../types";
+import { javaRules, jsRules, pyRules } from "../lib/lang-rules";
+import { highlightWithRules, type LangRules } from "../lib/highlighter";
+
+const languageMap: Record<string, LangRules> = {
+  javascript: jsRules,
+  js: jsRules,
+  python: pyRules,
+  py: pyRules,
+  java: javaRules,
+};
 
 export const CodeEditor = ({
   value = "",
@@ -10,29 +19,11 @@ export const CodeEditor = ({
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
   const preRef = useRef<HTMLPreElement | null>(null);
 
-  const [isLanguageLoaded, setIsLanguageLoaded] = useState(false);
+  const rules = languageMap[language] || jsRules;
 
-  // dyanmically loading languages
-  useEffect(() => {
-    setIsLanguageLoaded(false);
-    loadLanguage(language).then(() => {
-      setIsLanguageLoaded(true);
-    });
-  }, [language]);
-
-  const highlighted = React.useMemo(() => {
-    if (!isLanguageLoaded) {
-      return "Loading...";
-    }
-    const grammar =
-      selectedLanguages.languages[language] ||
-      selectedLanguages.languages.plaintext;
-    return selectedLanguages.highlight(value, grammar, language);
-  }, [value, language, isLanguageLoaded]);
-
-  if (!isLanguageLoaded) {
-    return <div>Loading language...</div>;
-  }
+  const highlighted = useMemo(() => {
+    return highlightWithRules(value, rules);
+  }, [value, rules]);
 
   return (
     <div style={{ position: "relative" }}>
