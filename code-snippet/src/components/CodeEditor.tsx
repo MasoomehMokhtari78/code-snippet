@@ -47,6 +47,24 @@ export const CodeEditor = ({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         spellCheck={false}
+        onKeyDown={(e) => {
+          if (e.key === "Tab") {
+            e.preventDefault();
+
+            const textarea = e.currentTarget as HTMLTextAreaElement;
+            const start = textarea.selectionStart;
+            const end = textarea.selectionEnd;
+
+            const newValue =
+              value.substring(0, start) + "  " + value.substring(end);
+
+            onChange(newValue);
+
+            requestAnimationFrame(() => {
+              textarea.selectionStart = textarea.selectionEnd = start + 2;
+            });
+          }
+        }}
         style={{
           position: "absolute",
           inset: 0,
