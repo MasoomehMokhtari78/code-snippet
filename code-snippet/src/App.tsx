@@ -40,7 +40,7 @@ function SnippetComp() {
       <SnippetLayout
         value={value}
         onChange={(newValue: string) => setValue(newValue)}
-        language="todoRules"
+        language="html"
         theme="VSCode Dark+"
         fontSize="14px"
         fontFamily="cursive"

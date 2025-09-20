@@ -1,15 +1,8 @@
 import { useRef, useMemo } from "react";
 import type { CodeEditorProps } from "../types";
-import { javaRules, jsRules, pyRules } from "../lib/lang-rules";
-import { highlightWithRules, type LangRules } from "../lib/highlighter";
-
-const languageMap: Record<string, LangRules> = {
-  javascript: jsRules,
-  js: jsRules,
-  python: pyRules,
-  py: pyRules,
-  java: javaRules,
-};
+import { jsRules } from "../lib/lang-rules";
+import { highlightWithRules } from "../lib/highlighter";
+import { languageMap } from "../lib/LanguageMap";
 
 export const CodeEditor = ({
   value = "",
