@@ -14,12 +14,12 @@ export type EditorTheme = {
 
 export type ThemeType = keyof typeof themes | EditorTheme;
 
-type LanguageType = keyof typeof languageMap | (string & {});
+export type LanguageType = keyof typeof languageMap;
 
 export type CodeEditorProps = {
   theme?: ThemeType;
   value?: string;
   onChange?: (v: string) => void;
-  language?: LanguageType;
+  language?: keyof typeof languageMap | (string & {});
   customLanguages?: Record<string, LangRules>;
 };

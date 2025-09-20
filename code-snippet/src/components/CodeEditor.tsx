@@ -1,5 +1,5 @@
 import { useRef, useMemo } from "react";
-import type { CodeEditorProps } from "../types";
+import type { CodeEditorProps, LanguageType } from "../types";
 import { jsRules } from "../lib/lang-rules";
 import { highlightWithRules } from "../lib/highlighter";
 import { languageMap } from "../lib/LanguageMap";
@@ -13,7 +13,10 @@ export const CodeEditor = ({
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
   const preRef = useRef<HTMLPreElement | null>(null);
 
-  const rules = customLanguages?.[language] ?? languageMap[language] ?? jsRules;
+  const rules =
+    customLanguages?.[language] ??
+    languageMap[language as LanguageType] ??
+    jsRules;
 
   const highlighted = useMemo(() => {
     return highlightWithRules(value, rules);
