@@ -1,3 +1,4 @@
+import type { LangRules } from "./lib/highlighter";
 import type { themes } from "./themes/themes";
 
 export type Language =
@@ -47,5 +48,6 @@ export type CodeEditorProps = {
   theme?: ThemeType;
   value?: string;
   onChange?: (v: string) => void;
-  language?: Language;
+  language?: Language | string;
+  customLanguages?: Record<string, LangRules>;
 };

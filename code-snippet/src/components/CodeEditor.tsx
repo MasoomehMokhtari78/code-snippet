@@ -15,11 +15,12 @@ export const CodeEditor = ({
   value = "",
   onChange = () => {},
   language = "javascript",
+  customLanguages,
 }: CodeEditorProps) => {
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
   const preRef = useRef<HTMLPreElement | null>(null);
 
-  const rules = languageMap[language] || jsRules;
+  const rules = customLanguages?.[language] ?? languageMap[language] ?? jsRules;
 
   const highlighted = useMemo(() => {
     return highlightWithRules(value, rules);

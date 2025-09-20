@@ -1,16 +1,10 @@
-// mini-highlighter.ts
 export type Rule = { type: string; regex: RegExp };
 export type LangRules = Rule[];
 
-/** Escape HTML for safe output */
 export const escapeHtml = (s: string) =>
   s.replaceAll("&", "&amp;").replaceAll("<", "&lt;").replaceAll(">", "&gt;");
 
-/** Tokenize without overlapping conflicts.
- *  rules must be ordered by priority (first = highest priority).
- */
 export function highlightWithRules(code: string, rules: LangRules) {
-  // collect matches
   const matches: {
     start: number;
     end: number;
@@ -34,11 +28,10 @@ export function highlightWithRules(code: string, rules: LangRules) {
         type: r.type,
         priority: i,
       });
-      if (m[0].length === 0) break; // avoid infinite loop
+      if (m[0].length === 0) break;
     }
   }
 
-  // sort by start, priority (lower index is higher priority), longer first to prefer big matches
   matches.sort(
     (a, b) =>
       a.start - b.start ||
@@ -46,7 +39,6 @@ export function highlightWithRules(code: string, rules: LangRules) {
       b.end - b.start - (a.end - a.start)
   );
 
-  // accept non-overlapping using greedy selection
   const accepted: typeof matches = [];
   for (const m of matches) {
     const overlaps = accepted.some(
@@ -55,7 +47,6 @@ export function highlightWithRules(code: string, rules: LangRules) {
     if (!overlaps) accepted.push(m);
   }
 
-  // build HTML
   accepted.sort((a, b) => a.start - b.start);
   let out = "";
   let pos = 0;
