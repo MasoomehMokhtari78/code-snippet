@@ -36,15 +36,15 @@ const languages: Record<string, LangRules> = {
   ],
 };
 
-function ToolbarSelect({
+function ToolbarSelect<T extends string>({
   value,
   onValueChange,
   options,
   placeholder,
 }: {
-  value: string;
-  onValueChange: (val: string) => void;
-  options: string[];
+  value: T;
+  onValueChange: (val: T) => void;
+  options: T[];
   placeholder: string;
 }) {
   return (
@@ -117,7 +117,7 @@ export function SnippetComp() {
           <ToolbarSelect
             value={defaultTheme}
             onValueChange={setDefaultTheme}
-            options={Object.keys(themes)}
+            options={Object.keys(themes) as Array<typeof defaultTheme>}
             placeholder="Theme"
           />
           {/* Token Styles */}
