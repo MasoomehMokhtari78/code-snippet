@@ -1,6 +1,6 @@
 import { baseTokenStyles } from "./baseTheme";
 
-const withBase = (overrides: Record<string, string>) => ({
+export const withBase = (overrides: Record<string, string>) => ({
   ...baseTokenStyles,
   ...overrides,
 });

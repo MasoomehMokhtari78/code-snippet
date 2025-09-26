@@ -23,7 +23,11 @@ export const CodeEditor = ({
   }, [value, rules]);
 
   return (
-    <div style={{ position: "relative" }}>
+    <div
+      style={{
+        position: "relative",
+      }}
+    >
       <pre
         ref={preRef}
         aria-hidden
@@ -34,6 +38,8 @@ export const CodeEditor = ({
           whiteSpace: "pre",
           minHeight: 200,
           fontFamily: "inherit",
+          msOverflowStyle: "none", // IE/Edge
+          scrollbarWidth: "none", // Firefox
         }}
       >
         <code
@@ -81,6 +87,9 @@ export const CodeEditor = ({
           fontFamily: "inherit",
           fontSize: "inherit",
           lineHeight: "inherit",
+          overflow: "auto",
+          msOverflowStyle: "none", // IE/Edge
+          scrollbarWidth: "none", // Firefox
         }}
       />
     </div>
