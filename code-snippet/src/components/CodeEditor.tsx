@@ -1,41 +1,33 @@
-import React, { useState, useEffect, useRef } from "react";
-import { selectedLanguages, loadLanguage } from "./SelectedLanguages";
-import type { CodeEditorProps } from "../types";
+import { useRef, useMemo } from "react";
+import type { CodeEditorProps, LanguageType } from "../types";
+import { jsRules } from "../lib/lang-rules";
+import { highlightWithRules } from "../lib/highlighter";
+import { languageMap } from "../lib/LanguageMap";
 
 export const CodeEditor = ({
   value = "",
   onChange = () => {},
   language = "javascript",
+  customLanguages,
 }: CodeEditorProps) => {
   const textareaRef = useRef<HTMLTextAreaElement | null>(null);
   const preRef = useRef<HTMLPreElement | null>(null);
 
-  const [isLanguageLoaded, setIsLanguageLoaded] = useState(false);
+  const rules =
+    customLanguages?.[language] ??
+    languageMap[language as LanguageType] ??
+    jsRules;
 
-  // dyanmically loading languages
-  useEffect(() => {
-    setIsLanguageLoaded(false);
-    loadLanguage(language).then(() => {
-      setIsLanguageLoaded(true);
-    });
-  }, [language]);
-
-  const highlighted = React.useMemo(() => {
-    if (!isLanguageLoaded) {
-      return "Loading...";
-    }
-    const grammar =
-      selectedLanguages.languages[language] ||
-      selectedLanguages.languages.plaintext;
-    return selectedLanguages.highlight(value, grammar, language);
-  }, [value, language, isLanguageLoaded]);
-
-  if (!isLanguageLoaded) {
-    return <div>Loading language...</div>;
-  }
+  const highlighted = useMemo(() => {
+    return highlightWithRules(value, rules);
+  }, [value, rules]);
 
   return (
-    <div style={{ position: "relative" }}>
+    <div
+      style={{
+        position: "relative",
+      }}
+    >
       <pre
         ref={preRef}
         aria-hidden
@@ -46,6 +38,8 @@ export const CodeEditor = ({
           whiteSpace: "pre",
           minHeight: 200,
           fontFamily: "inherit",
+          msOverflowStyle: "none", // IE/Edge
+          scrollbarWidth: "none", // Firefox
         }}
       >
         <code
@@ -59,6 +53,24 @@ export const CodeEditor = ({
         value={value}
         onChange={(e) => onChange(e.target.value)}
         spellCheck={false}
+        onKeyDown={(e) => {
+          if (e.key === "Tab") {
+            e.preventDefault();
+
+            const textarea = e.currentTarget as HTMLTextAreaElement;
+            const start = textarea.selectionStart;
+            const end = textarea.selectionEnd;
+
+            const newValue =
+              value.substring(0, start) + "  " + value.substring(end);
+
+            onChange(newValue);
+
+            requestAnimationFrame(() => {
+              textarea.selectionStart = textarea.selectionEnd = start + 2;
+            });
+          }
+        }}
         style={{
           position: "absolute",
           inset: 0,
@@ -75,6 +87,9 @@ export const CodeEditor = ({
           fontFamily: "inherit",
           fontSize: "inherit",
           lineHeight: "inherit",
+          overflow: "auto",
+          msOverflowStyle: "none", // IE/Edge
+          scrollbarWidth: "none", // Firefox
         }}
       />
     </div>

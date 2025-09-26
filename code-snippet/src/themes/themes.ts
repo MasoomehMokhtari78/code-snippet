@@ -1,17 +1,24 @@
+import { baseTokenStyles } from "./baseTheme";
+
+export const withBase = (overrides: Record<string, string>) => ({
+  ...baseTokenStyles,
+  ...overrides,
+});
+
 export const themes = {
   light: {
     background: "linear-gradient(135deg, #faf3dd, #fdf6e3)",
     editorStyle: { backgroundColor: "#fdf6e3e6" },
-    tokenStyles: {
+    tokenStyles: withBase({
       comment: "#93a1a1",
       keyword: "#859900",
       string: "#2aa198",
-    },
+    }),
   },
   seti: {
     background: "linear-gradient(135deg, #1e2122, #151718)",
     editorStyle: { backgroundColor: "#151718" },
-    tokenStyles: {
+    tokenStyles: withBase({
       comment: "#41535b",
       string: "#55b5db",
       number: "#cd3f45",
@@ -23,16 +30,16 @@ export const themes = {
       boolean: "#cd3f45",
       meta: "#55b5db",
       tag: "#55b5db",
-      attrName: "#9fca56",
+      "attr-name": "#9fca56",
       property: "#a074c4",
-      className: "#9fca56",
+      "class-name": "#9fca56",
       builtin: "#9fca56",
-    },
+    }),
   },
   oneDark: {
     background: "linear-gradient(135deg, #2c313c, #282c34)",
     editorStyle: { backgroundColor: "#282c34" },
-    tokenStyles: {
+    tokenStyles: withBase({
       comment: "#5c6370",
       string: "#98c379",
       number: "#d19a66",
@@ -41,63 +48,63 @@ export const themes = {
       function: "#56b6c2",
       variable: "#e06c75",
       constant: "#d19a66",
-      className: "#e5c07b",
+      "class-name": "#e5c07b",
       tag: "#e06c75",
-      attrName: "#d19a66",
+      "attr-name": "#d19a66",
       operator: "#56b6c2",
       punctuation: "#abb2bf",
       boolean: "#d19a66",
       property: "#56b6c2",
       important: "#d19a66",
       selector: "#e06c75",
-    },
+    }),
   },
   "GitHub Light": {
     background: "linear-gradient(135deg, #fafbfc, #ffffff)",
     editorStyle: { backgroundColor: "#ffffff", color: "#252424ff" },
-    tokenStyles: {
+    tokenStyles: withBase({
       text: "#24292e",
       keyword: "#d73a49",
       string: "#032f62",
       comment: "#6a737d",
       gutter: "#f6f8fa",
       selection: "#c8e1ff",
-    },
+    }),
   },
   "VSCode Dark+": {
     background: "linear-gradient(135deg, #2d2d2d, #1e1e1e)",
     editorStyle: { backgroundColor: "#1e1e1e" },
-    tokenStyles: {
+    tokenStyles: withBase({
       text: "#d4d4d4",
       keyword: "#569cd6",
       string: "#ce9178",
       comment: "#6a9955",
       gutter: "#252526",
       selection: "#264f78",
-    },
+    }),
   },
   Monokai: {
     background: "linear-gradient(135deg, #3e3d32, #272822)",
     editorStyle: { backgroundColor: "#272822" },
-    tokenStyles: {
+    tokenStyles: withBase({
       text: "#f8f8f2",
       keyword: "#f92672",
       string: "#e6db74",
       comment: "#75715e",
       gutter: "#3e3d32",
       selection: "#49483e",
-    },
+    }),
   },
   Dracula: {
     background: "linear-gradient(135deg, #44475a, #282a36)",
     editorStyle: { backgroundColor: "#282a36" },
-    tokenStyles: {
+    tokenStyles: withBase({
       text: "#f8f8f2",
       keyword: "#ff79c6",
       string: "#f1fa8c",
       comment: "#6272a4",
       gutter: "#44475a",
       selection: "#44475a",
-    },
+    }),
   },
 };

@@ -1,7 +1,6 @@
-/* Reset and basic page setup */
+@import "tailwindcss";
+
 * {
-  margin: 0;
-  padding: 0;
   box-sizing: border-box;
 }
 
@@ -11,9 +10,9 @@ body,
   height: 100%;
   width: 100%;
   font-family: "Fira Code", monospace;
-  background: #1e1e1e; /* dark background like VSCode */
+  background: #1e1e1e;
   color: #d4d4d4;
-  overflow: hidden; /* prevent page scroll */
+  overflow: auto;
 }
 
 body {
@@ -22,10 +21,17 @@ body {
   align-items: center;
 }
 
-/* Optional: allow editor to take full width/height */
 .rc-editor {
   width: 90%;
   max-width: 1000px;
   min-height: 400px;
   height: 70%;
+}
+
+input {
+  padding: 8px;
+}
+
+button {
+  padding: 4px 8px;
 }

@@ -59,7 +59,9 @@ export const SnippetLayout = ({
       style={{
         display: "flex",
         flexDirection: "column",
+        justifyContent: "center",
         minWidth: "500px",
+        minHeight: "fit-content",
         padding,
         width,
         height,
