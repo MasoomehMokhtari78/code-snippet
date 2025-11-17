@@ -52,6 +52,7 @@ export const CustomThemeOptions = ({
               <label className="w-24 capitalize">{key}</label>
               <input
                 type="color"
+                style={{ height: "50px" }}
                 value={customTheme.tokenStyles[key]}
                 onChange={(e) =>
                   setcustomTheme((prev) => ({
@@ -75,6 +76,7 @@ export const CustomThemeOptions = ({
             <label className="w-24">Snippet Background</label>
             <input
               type="color"
+              style={{ height: "50px" }}
               value={customTheme.background}
               onChange={(e) =>
                 setcustomTheme((prev) => ({
@@ -95,6 +97,7 @@ export const CustomThemeOptions = ({
             <label className="w-24">Editor Background</label>
             <input
               type="color"
+              style={{ height: "50px" }}
               value={customTheme.editorStyle.backgroundColor}
               onChange={(e) =>
                 setcustomTheme((prev) => ({
