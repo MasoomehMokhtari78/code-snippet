@@ -60,7 +60,7 @@ export function SnippetComp() {
     useState<keyof typeof themes>("VSCode Dark+");
 
   return (
-    <div className="flex flex-col items-center justify-center h-full gap-8 p-6 overflow-auto min-w-fit">
+    <div className="flex flex-col items-center justify-center min-h-fit h-full gap-8 p-6 overflow-auto min-w-fit">
       <div className="flex flex-col items-center gap-2">
         <h1
           style={{
